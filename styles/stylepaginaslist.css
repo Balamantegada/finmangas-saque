@@ -1,0 +1,232 @@
+*{
+    padding: 0px;
+    margin: 0px;
+
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(159,92,244,1) 50%, rgb(251, 254, 255) 100%);
+    background-size: 100%;
+    background-attachment: fixed;
+
+    color: aliceblue;
+    font-family: 'Work Sans', sans-serif;
+}
+header{
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(19, 18, 18);
+    position:sticky;
+    height: 8vh;
+}
+header::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+nav a{
+    color: whitesmoke;
+}
+nav img{
+    float: left;
+    width: 10vh;
+    transition: 450ms;
+}   
+nav h1{
+  float: left;
+  font-size: 6.5vh;
+  position: relative;
+  transition: ease-in 450ms;
+  cursor: pointer;
+}
+nav h1:hover{
+    color: rgba(159,92,244,1);
+    filter: drop-shadow(0 0 25px currentColor);
+}
+nav h1::before{
+    content: '';
+    display: block;
+    height: 5px;
+    width: 100%;
+    bottom: 0px;
+    padding-left: 90px;
+    background: currentColor;
+    position: absolute;
+
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 450ms ease-in;
+}
+nav h1:hover::before{
+    transform: scaleX(1);
+    transform-origin: left;
+}
+nav ul{
+    float: right;
+    margin-right: 5vh;
+}
+nav ul li{
+    margin-right: 4vh;
+    display: inline-block;
+
+    padding-top: 3vh;
+}
+nav ul a{
+    color:whitesmoke;
+    position: relative;
+    font-size: 20px;
+    padding: 5px;
+}
+nav ul a:hover{
+    color: rgba(159,92,244,1);
+    transition: color ease-in-out 750ms;
+    filter: drop-shadow(0 0 25px currentColor);
+}
+nav ul a:before{
+    content: '';
+    display: block;
+    top: -33px;
+    height: 14px;
+    width: 100%;
+    background: currentColor;
+    position: absolute;
+    
+
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 450ms ease-in-out;
+}
+nav ul a:hover::before{
+    transform: scaleX(1);
+    transform-origin: left;
+    
+}
+.login{
+    margin-left: 2rem;
+    color: rgb(248, 230, 63);
+}
+.mobile-menu{
+    cursor: pointer;
+    display: none;
+}
+.mobile-menu div{
+    width: 32px;
+    height: 2px;
+    background: #fff;
+    margin: 8px;
+    transition: 0.3s;
+}
+.mobile-menu.active .line1{
+    transform: rotate(-45deg) translate(-8px, 8px);
+}
+.mobile-menu.active .line2{
+    opacity: 0;
+}
+.mobile-menu.active .line3{
+    transform: rotate(45deg) translate(-5px, -7px);
+}
+section{
+    width: 80%;
+    margin: 0 auto;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 27%, rgba(71,8,114,1) 55%, rgba(78,0,106,1) 82%, rgba(78,9,121,1) 100%);
+    padding-top: 150px;
+    height: 100vh;
+}
+section p{
+    background: rgba(41, 2, 51, 0.253);
+    width: 80%;
+    padding: 20px;
+}
+.listaimagens{
+    text-align: center;
+}
+.listaimagens h1{
+    font-size: 5vh;
+    transition: 400ms ease-in;
+}
+.listaimagens img{
+    width: 28vh;
+    position: relative;
+    transition: 400ms;
+    padding: 1vh;
+    background-color: rgba(255, 255, 255, 0.151);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.listaimagens img:hover{
+    width: 30vh;
+    padding: 2vh;
+}
+footer{
+    color: aliceblue;
+    background: rgb(0, 0, 0);
+    font-size: 20px;
+    width: 100%;
+    overflow: hidden;
+    bottom: 0;
+    position: relative;
+}
+footer div{
+    padding: 15px;
+}
+footer div div:nth-child(1){
+    float: left;
+}
+footer div div:nth-child(2){
+    float: right;
+
+}
+@media(max-width: 1080px){
+    body{
+        overflow-x: hidden;
+    }
+    .nav-list{
+        z-index: 1;
+        position: absolute;
+        right: 0;
+        top: 8vh;
+        width: 50vw;
+        height: 100vh;
+        background: rgb(19, 18, 18);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        margin-right: 0;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in;
+        z-index: 100;
+    }
+    nav ul li{
+        margin-left: 0;
+        opacity: 0;
+    }
+    .mobile-menu{
+        display: block;
+        float: right;
+        padding: 2vh;
+    }
+    .login{
+        margin-left: 0;
+    }
+    .listaimagens img{
+        position: static;
+    }
+    section{
+        width: 100%;
+    }
+}
+.nav-list.active{
+    transform: translateX(0);
+}
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

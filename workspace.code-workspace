@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\Users\\Escola S\\Desktop\\Estudo (Arthur L. Kroenke)\\Sites"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\Users\\Escola S\\Desktop\\Estudo (Arthur L. Kroenke)\\javascript"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "javascript"
+	}
+}
