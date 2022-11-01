@@ -8,8 +8,11 @@
 	}
     // VENDAS
     include_once('../conexãoDB/config.php');
-    $formVendaCMD = "SELECT * FROM pessoasfisicas ORDER BY id_pessoa DESC";
-    $formVendaArrayComprador = $conexao->query($formVendaCMD);
+    $formVendaCMDfisica = "SELECT * FROM pessoasfisicas ORDER BY id_pessoa DESC";
+    $formVendaArrayCompradorFisico = $conexao->query($formVendaCMDfisica);
+    include_once('../conexãoDB/config.php');
+    $formVendaCMDjuridica = "SELECT * FROM pessoasjuridicas ORDER BY id_pessoa DESC";
+    $formVendaArrayCompradorJuridico = $conexao->query($formVendaCMDjuridica);
     include_once('../conexãoDB/config.php');
     $sql1 = "SELECT * FROM vendas ORDER BY id_vendas DESC";
     $arrayListVendas = $conexao->query($sql1);
@@ -23,32 +26,6 @@
     include_once('../conexãoDB/config.php');
     $sql4 = "SELECT * FROM itemcompra ORDER BY id_item_compra DESC";
     $arrayListComprasItem = $conexao->query($sql4);
-
-
-
-
-
-
-
-
-
-/*
-    include_once('../conexãoDB/config.php');
-    $sql1 = "SELECT * FROM pessoasfisicas ORDER BY id_pessoa DESC";
-    $arrayPessoasFisicas = $conexao->query($sql1);
-
-    include_once('../conexãoDB/config.php');
-    $sql2 = "SELECT * FROM pessoasjuridicas ORDER BY id_pessoa DESC";
-    $arrayPessoasJuridicas = $conexao->query($sql2);
-
-    include_once('../conexãoDB/config.php');
-    $sql2 = "SELECT * FROM cidadepessoas ORDER BY id_cidade DESC";
-    $arrayCidade = $conexao->query($sql2);
-
-    include_once('../conexãoDB/config.php');
-    $sql3 = "SELECT * FROM estadopessoas ORDER BY id_estado_db DESC";
-    $arrayEstado = $conexao->query($sql3);
-*/
 ?>
 
 
@@ -120,16 +97,21 @@
                                 <br><br>
                                 <p>Comprador:</p>
                                 <?php 
-                                    while($data = mysqli_fetch_assoc($formVendaArrayComprador)){
-                                        echo"<input type=\"radio\" id=".$data['nome']." name=\"comprador\" value=".$data['nome']." required>";
-                                        echo"<label for=".$data['nome'].">".$data['nome']."</label>";
+                                    while($dataCompradorFisica = mysqli_fetch_assoc($formVendaArrayCompradorFisico)){
+                                        echo"<input type=\"radio\" id=".$dataCompradorFisica['nome']." name=\"comprador\" value=".$dataCompradorFisica['nome']." required>";
+                                        echo"<label for=".$dataCompradorFisica['nome'].">Fisica: ".$dataCompradorFisica['nome']."</label>";
+                                        echo"<br>";
+                                    };
+                                    while($dataCompradorjurica = mysqli_fetch_assoc($formVendaArrayCompradorJuridico)){
+                                        echo"<input type=\"radio\" id=".$dataCompradorjurica['nome']." name=\"comprador\" value=".$dataCompradorjurica['nome']." required>";
+                                        echo"<label for=".$dataCompradorjurica['nome'].">Juridica: ".$dataCompradorjurica['nome']."</label>";
                                         echo"<br>";
                                     };
                                     ?>
                                 <br><br>
                             </fieldset>
                             <fieldset>
-                                <legend><b>Fórmulário de item venda</b></legend>
+                                <legend><b>Formulário de item venda</b></legend>
                                 <br>
                                 <div class="inputBox">
                                     <input type="number" name="quantidadeVenda" id="quantidadeVenda" class="inputUser"

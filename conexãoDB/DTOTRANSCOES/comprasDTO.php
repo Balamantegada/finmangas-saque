@@ -10,7 +10,7 @@
 
     // cadastro no banco
     include_once('../config.php');
-    $result1 = mysqli_query($conexao, "INSERT INTO compra(descriscao, dataEmissao, dataEntrega) VALUES('$descrisaoCompra', '$dateEmissaoCompra', '$dateEntregaCompra')");
+    $result1 = mysqli_query($conexao, "INSERT INTO compra(descrisao, dataEmissao, dataEntrega) VALUES('$descrisaoCompra', '$dateEmissaoCompra', '$dateEntregaCompra')");
     include_once('../config.php');
     $result2 = mysqli_query($conexao, "INSERT INTO itemcompra(quantidade, valor) VALUES('$quantidadeCompra', '$valorCompra')");
     header('Location: ../../cadastros/transacoes.php', true, 301);

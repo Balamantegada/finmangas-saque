@@ -10,6 +10,14 @@
     include_once('../conexãoDB/config.php');
     $sql1 = "SELECT * FROM ordemservicodb ORDER BY id_ordemservico DESC";
     $arrayOrdemServicos = $conexao->query($sql1);
+
+    // Serviços
+    include_once('../conexãoDB/config.php');
+    $sql2 = "SELECT * FROM servico ORDER BY id_servico DESC";
+    $arrayListServicos = $conexao->query($sql2);
+    include_once('../conexãoDB/config.php');
+    $sql3 = "SELECT * FROM itemservico ORDER BY id_item_servico DESC";
+    $arrayListServicoItem = $conexao->query($sql3);
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +69,7 @@
             <div class="container">
 
                 <div class="formularioBody">
+
                     <form action="../conexãoDB/ordemservicosDTO.php" method="POST" style="float: left;">
                         <fieldset>
                             <legend><b>Fórmulário de Ordem e produtos</b></legend>
@@ -107,21 +116,6 @@
                                     required>
                                 <label for="acresimoservico" class="labelInput">Acresimo servico/label>
                             </div>
-                            <!-- <br><br>
-                            <div class="inputBox">
-                                <input type="text" name="tipoFisico" id="tipoFisico" class="inputUser" required>
-                                <label for="tipoFisico" class="labelInput">Tipo</label>
-                            </div>
-                            <br><br>
-                            <p>Sexo:</p>
-                            <input type="radio" id="feminino" name="generoFisico" value="feminino" required>
-                            <label for="feminino">Feminino</label>
-                            <br>
-                            <input type="radio" id="masculino" name="generoFisico" value="masculino" required>
-                            <label for="masculino">Masculino</label>
-                            <br>
-                            <input type="radio" id="outro" name="generoFisico" value="outro" required>
-                            <label for="outro">Outro</label> -->
                             <br><br>
                             <div class="inputBox">
                                 <input type="number" name="descontoproduto" id="descontoproduto" class="inputUser"
@@ -150,7 +144,49 @@
                             <input type="submit" name="submit" id="submit">
                         </fieldset>
                     </form>
+                    <div style="grid-template-columns: 1fr 1fr;">
+                        <form action="../conexãoDB/DTOORDEMSERVICOS/servicosDTO.php" method="POST" style="float: left;">
+                            <fieldset>
+                                <legend><b>Fórmulário de serviço</b></legend>
+                                <br>
+                                <div class="inputBox">
+                                    <input type="text" name="descrisaoServico" id="descrisaoServico" class="inputUser"
+                                        required>
+                                    <label for="descrisaoServico" class="labelInput">Descrisão</label>
+                                </div>
+                                <br><br>
+                                <div class="inputBox">
+                                    <input type="number" name="valorServico" id="valorServico" class="inputUser"
+                                        required>
+                                    <label for="valorServico" class="labelInput">Valor</label>
+                                </div>
+                                <br><br>
+                            </fieldset>
+                            <fieldset>
+                                <legend><b>Formulário de item serviço</b></legend>
+                                <br>
+                                <div class="inputBox">
+                                    <input type="number" name="valorItemServico" id="valorItemServico" class="inputUser"
+                                        required>
+                                    <label for="valorItemServico" class="labelInput">Valor</label>
+                                </div>
+                                <br><br>
+                                <div class="inputBox">
+                                    <input type="number" name="atribute30" id="atribute30" class="inputUser" required>
+                                    <label for="atribute30" class="labelInput">Atribute30</label>
+                                </div>
+                                <br><br>
+                                <div class="inputBox">
+                                    <input type="number" name="atribute34" id="atribute34" class="inputUser" required>
+                                    <label for="atribute34" class="labelInput">Atribute34</label>
+                                </div>
+                                <br><br>
+                                <input type="submit" name="submit" id="submit">
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
+
 
             </div>
             <h1 style="font-size: 40px; text-align: center;">Ordem e Serviços</h1>
@@ -195,6 +231,57 @@
                         ?>
                     <tbody>
                 </table>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr;">
+                <div class="table-wrapper">
+                    <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Serviços</h1>
+                    <table class="fl-table ">
+                        <thead>
+                            <tr>
+                                <th>ID serviços</th>
+                                <th>Descrisão</th>
+                                <th>Valor/th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            while($arrayListServicosData = mysqli_fetch_assoc($arrayListServicos)){
+                                echo"<tr>";
+                                echo"<td>".$arrayListServicosData['id_servico']."</td>";
+                                echo"<td>".$arrayListServicosData['descrisao']."</td>";
+                                echo"<td>".$arrayListServicosData['valor']."</td>";
+                                echo"</tr>";
+                            };
+                        ?>
+                        <tbody>
+                    </table>
+                </div>
+
+                <div class="table-wrapper">
+                    <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Item serviços</h1>
+                    <table class="fl-table ">
+                        <thead>
+                            <tr>
+                                <th>ID item serviço</th>
+                                <th>Valor</th>
+                                <th>Atribute30</th>
+                                <th>Atribute34</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            while($arrayListServicoItemData = mysqli_fetch_assoc($arrayListServicoItem)){
+                                echo"<tr>";
+                                echo"<td>".$arrayListServicoItemData['id_item_servico']."</td>";
+                                echo"<td>".$arrayListServicoItemData['valor']."</td>";
+                                echo"<td>".$arrayListServicoItemData['atribute30']."</td>";
+                                echo"<td>".$arrayListServicoItemData['atribute34']."</td>";
+                                echo"</tr>";
+                            };
+                        ?>
+                        <tbody>
+                    </table>
+                </div>
             </div>
 
         </section>

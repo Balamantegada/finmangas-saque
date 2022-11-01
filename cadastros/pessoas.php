@@ -158,7 +158,7 @@
                     </form>
                     <form action="../conexãoDB/pessoajuridica.php" method="POST" style="float: left;">
                         <fieldset>
-                            <legend><b>Fórmulário de Clientes fisicos</b></legend>
+                            <legend><b>Fórmulário de Clientes Juridicos</b></legend>
                             <br>
                             <div class="inputBox">
                                 <input type="text" name="nomeJuridico" id="nome" class="inputUser" required>
