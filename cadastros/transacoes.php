@@ -6,7 +6,7 @@
 		header('Location: ../index.php');
 		exit;
 	}
-
+    // VENDAS
     include_once('../conexãoDB/config.php');
     $formVendaCMD = "SELECT * FROM pessoasfisicas ORDER BY id_pessoa DESC";
     $formVendaArrayComprador = $conexao->query($formVendaCMD);
@@ -17,8 +17,12 @@
     $sql2 = "SELECT * FROM itemvenda ORDER BY id_item_venda DESC";
     $arrayListVendasItem = $conexao->query($sql2);
 
-
-
+    // COMPRAS
+    $sql3 = "SELECT * FROM compra ORDER BY id_compra DESC";
+    $arrayListCompras = $conexao->query($sql3);
+    include_once('../conexãoDB/config.php');
+    $sql4 = "SELECT * FROM itemcompra ORDER BY id_item_compra DESC";
+    $arrayListComprasItem = $conexao->query($sql4);
 
 
 
@@ -142,6 +146,49 @@
                             </fieldset>
                         </form>
                     </div>
+                    <div style="grid-template-columns: 1fr 1fr;">
+                        <form action="../conexãoDB/DTOTRANSCOES/comprasDTO.php" method="POST" style="float: left;">
+                            <fieldset>
+                                <legend><b>Fórmulário de compras</b></legend>
+                                <br>
+                                <div class="inputBox">
+                                    <input type="text" name="descrisaoCompra" id="descrisaoCompra" class="inputUser"
+                                        required>
+                                    <label for="descrisaoCompra" class="labelInput">Descrisão</label>
+                                </div>
+                                <br><br>
+                                <div class="inputBox">
+                                    <input type="date" name="dateEmissaoCompra" id="dateEmissaoCompra" class="inputUser"
+                                        required>
+                                    <label for="dateEmissaoCompra" class="labelInput">Data Emissão</label>
+                                </div>
+                                <br><br>
+                                <div class="inputBox">
+                                    <input type="date" name="dateEntregaCompra" id="dateEntregaCompra" class="inputUser"
+                                        required>
+                                    <label for="dateEntregaCompra" class="labelInput">Data entrega</label>
+                                </div>
+                                <br><br>
+
+                            </fieldset>
+                            <fieldset>
+                                <legend><b>Fórmulário de item compra</b></legend>
+                                <br>
+                                <div class="inputBox">
+                                    <input type="number" name="quantidadeCompra" id="quantidadeCompra" class="inputUser"
+                                        required>
+                                    <label for="quantidadeCompra" class="labelInput">Quantidade</label>
+                                </div>
+                                <br><br>
+                                <div class="inputBox">
+                                    <input type="number" name="valorCompra" id="valorCompra" class="inputUser" required>
+                                    <label for="valorCompra" class="labelInput">Valor</label>
+                                </div>
+                                <br><br>
+                                <input type="submit" name="submit" id="submit">
+                            </fieldset>
+                        </form>
+                    </div>
                     <form action="../conexãoDB/pessoajuridica.php" method="POST" style="float: left;">
                         <fieldset>
                             <legend><b>Fórmulário de Clientes fisicos</b></legend>
@@ -200,7 +247,7 @@
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr;">
                 <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Item venda</h1>
+                    <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Vendas</h1>
                     <table class="fl-table ">
                         <thead>
                             <tr>
@@ -226,7 +273,7 @@
                 </div>
 
                 <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Estados</h1>
+                    <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Item venda</h1>
                     <table class="fl-table ">
                         <thead>
                             <tr>
@@ -241,7 +288,58 @@
                                 echo"<tr>";
                                 echo"<td>".$arrayListVendasItemData['id_item_venda']."</td>";
                                 echo"<td>".$arrayListVendasItemData['quantidade']."</td>";
-                                echo"<td>".$arrayListVendasItemData['valor']."</td>";
+                                echo"<td>R$ ".$arrayListVendasItemData['valor']."</td>";
+                                echo"</tr>";
+                            };
+                        ?>
+                        <tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr;">
+                <div class="table-wrapper">
+                    <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Compras</h1>
+                    <table class="fl-table ">
+                        <thead>
+                            <tr>
+                                <th>ID Compras</th>
+                                <th>Descrisão</th>
+                                <th>Data emissão</th>
+                                <th>Data entrega</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            while($arrayListComprasData = mysqli_fetch_assoc($arrayListCompras)){
+                                echo"<tr>";
+                                echo"<td>".$arrayListComprasData['id_compra']."</td>";
+                                echo"<td>".$arrayListComprasData['descrisao']."</td>";
+                                echo"<td>".$arrayListComprasData['dataEmissao']."</td>";
+                                echo"<td>".$arrayListComprasData['dataEntrega']."</td>";
+                                echo"</tr>";
+                            };
+                        ?>
+                        <tbody>
+                    </table>
+                </div>
+
+                <div class="table-wrapper">
+                    <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Item compra</h1>
+                    <table class="fl-table ">
+                        <thead>
+                            <tr>
+                                <th>ID item compra</th>
+                                <th>Quantidade</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            while($arrayListCompraItemData = mysqli_fetch_assoc($arrayListComprasItem)){
+                                echo"<tr>";
+                                echo"<td>".$arrayListCompraItemData['id_item_compra']."</td>";
+                                echo"<td>".$arrayListCompraItemData['quantidade']."</td>";
+                                echo"<td>".$arrayListCompraItemData['valor']."</td>";
                                 echo"</tr>";
                             };
                         ?>
