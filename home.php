@@ -66,6 +66,9 @@
                 <a href="cadastros/transacoes.php">
                     <img src="imgs/icons/transações.png">
                 </a>
+                <a href="cadastros/contas.php">
+                    <img src="imgs/icons/contas_icon.png">
+                </a>
             </div>
         </section>
     </main>

@@ -171,59 +171,8 @@
                             </fieldset>
                         </form>
                     </div>
-                    <form action="../conexãoDB/pessoajuridica.php" method="POST" style="float: left;">
-                        <fieldset>
-                            <legend><b>Fórmulário de Clientes fisicos</b></legend>
-                            <br>
-                            <div class="inputBox">
-                                <input type="text" name="nomeJuridico" id="nome" class="inputUser" required>
-                                <label for="nome" class="labelInput">Nome completo</label>
-                            </div>
-                            <br><br>
-                            <div class="inputBox">
-                                <input type="text" name="enderecoJuridico" id="endereco" class="inputUser" required>
-                                <label for="endereco" class="labelInput">Endereço</label>
-                            </div>
-                            <br><br>
-                            <div class="inputBox">
-                                <input type="tel" name="telefoneJuridico" id="telefone" class="inputUser" required>
-                                <label for="telefone" class="labelInput">Telefone</label>
-                            </div>
-                            <br><br>
-                            <input type="submit" name="submit" id="submit">
-                        </fieldset>
-                    </form>
-                    <div style="display: grid; grid-template-rows: 20vh;">
-                        <form action="../conexãoDB/DTOPESSOAS/cidadeDTO.php" method="POST" style="float: right;">
-                            <fieldset>
-                                <legend><b>Fórmulário de cidades</b></legend>
-                                <br>
-                                <div class="inputBox">
-                                    <input type="text" name="cidadeCadas" id="cidadeCadas" class="inputUser" required>
-                                    <label for="cidadeCadas" class="labelInput">Cidade</label>
-                                </div>
-                                <br><br>
-                                <input type="submit" name="submit" id="submit">
-                            </fieldset>
-                        </form>
-                        <form action="../conexãoDB/DTOPESSOAS/estadoDTO.php" method="POST" style="float: right;">
-                            <fieldset>
-                                <legend><b>Fórmulário de Estados</b></legend>
-                                <br>
-                                <div class="inputBox">
-                                    <input type="text" name="nomeEstado" id="nomeEstado" class="inputUser" required>
-                                    <label for="nomeEstado" class="labelInput">Estado</label>
-                                </div>
-                                <br><br>
-                                <div class="inputBox">
-                                    <input type="text" name="siglaEstado" id="siglaEstado" class="inputUser" required>
-                                    <label for="siglaEstado" class="labelInput">Sigla estado</label>
-                                </div>
-                                <br><br>
-                                <input type="submit" name="submit" id="submit">
-                            </fieldset>
-                        </form>
-                    </div>
+
+
 
                 </div>
             </div>
@@ -328,49 +277,6 @@
                         <tbody>
                     </table>
                 </div>
-            </div>
-            <h1 style="font-size: 40px; text-align: center;">Pessoas fisicas</h1>
-            <div class="table-wrapper">
-                <table class="fl-table ">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nome</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            while($user_data2 = mysqli_fetch_assoc($arrayPessoasFisicas)){
-                                echo"<tr>";
-                                echo"<td>".$user_data2['id_pessoa']."</td>";
-                                echo"<td>".$user_data2['nome']."</td>";
-                                echo"</tr>";
-                            };
-                        ?>
-                    <tbody>
-                </table>
-            </div>
-            <h1 style="font-size: 40px; text-align: center;">Pessoas Juridicas</h1>
-            <div class="table-wrapper">
-                <table class="fl-table ">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nome</th>
-                            <th>Endereço</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            while($user_data1 = mysqli_fetch_assoc($arrayPessoasJuridicas)){
-                                echo"<tr>";
-                                echo"<td>".$user_data1['id_pessoa']."</td>";
-                                echo"<td>".$user_data1['nome']."</td>";
-                                echo"</tr>";
-                            };
-                        ?>
-                    <tbody>
-                </table>
             </div>
 
         </section>
