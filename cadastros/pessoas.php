@@ -76,7 +76,7 @@
                 <div class="formularioBody">
                     <form action="../conexãoDB/pessoafisica.php" method="POST" style="float: left;">
                         <fieldset>
-                            <legend><b>Fórmulário de Clientes fisicos</b></legend>
+                            <legend><b>Fórmulário de Clientes</b></legend>
                             <br>
                             <div class="inputBox">
                                 <input type="text" name="nomeFisico" id="nomeFisico" class="inputUser" required>
@@ -124,108 +124,160 @@
                                 <label for="tipoFisico" class="labelInput">Tipo</label>
                             </div>
                             <br><br>
-                            <p>Sexo:</p>
+                            <p>pessoa fisica ou juridica:</p>
+                            <input type="radio" id="pessoaFisica" name="tipoDePessoa" value="pessoaFisica" required>
+                            <label for="pessoaFisica">Fisica</label>
+                            <br>
+                            <input type="radio" id="pessoaJuridica" name="tipoDePessoa" value="pessoaJuridica" required>
+                            <label for="pessoaJuridica">Jurica</label>
+                            <br>
+                            <br><br>
+                            <p>Sexo: </p>
                             <input type="radio" id="feminino" name="generoFisico" value="feminino" required>
-                            <label for="feminino">Feminino</label>
+                            <label for="feminino"> Feminino </label>
                             <br>
                             <input type="radio" id="masculino" name="generoFisico" value="masculino" required>
-                            <label for="masculino">Masculino</label>
-                            <br>
-                            <input type="radio" id="outro" name="generoFisico" value="outro" required>
-                            <label for="outro">Outro</label>
-                            <br><br>
-                            <div class="inputBox">
-                                <input type="text" name="cpfFisico" id="cpf" class="inputUser" required>
-                                <label for="cpf" class="labelInput">Cpf</label>
-                            </div>
-                            <br><br>
-                            <div class="inputBox">
-                                <input type="text" name="rgFisico" id="rg" class="inputUser" required>
-                                <label for="rg" class="labelInput">RG</label>
-                            </div>
-                            <br><br>
-                            <label for="data_nascimento"><b>Data de Nascimento:</b></label>
-                            <input type="date" name="data_nascimentoFisico" id="data_nascimento" required>
-                            <br><br><br>
-                            <div class="inputBox">
-                                <input type="tel" name="celularFisico" id="Celular" class="inputUser" required>
-                                <label for="Celular" class="labelInput">Celular</label>
-                            </div>
-                            <br><br>
+                            <label for="masculino"> Masculino <br>
+                                <input type="radio" id="outro" name="generoFisico" value="outro" required>
+                                <label for="outro"> Outro </label> <br> <br>
 
-                            <input type="submit" name="submit" id="submit">
+                                <div class="inputBox">
+                                    <input type="text" name="cpfFisico" id="cpf" class="inputUser" required>
+                                    <label for="cpf" class="labelInput"> Cpf </label>
+                                </div> <br> <br>
+                                <div class="inputBox">
+                                    <input type="text" name="rgFisico" id="rg" class="inputUser" required>
+                                    <label for="rg" class="labelInput"> RG
+                                </div> <br>
+                                <br>
+                                <label for="data_nascimento">
+                                    <p> Data de Nascimento: </p>
+                                </label>
+                                <input type="date" name="data_nascimentoFisico" id="data_nascimento" required>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="inputBox">
+                                    <input type="tel" name="celularFisico" id="Celular" class="inputUser" required>
+                                    <label for="Celular" class="labelInput"> Celular
+                                </div>
+                                <br>
+                                <br>
+
+                                <input type="submit" name="submit" id="submit">
                         </fieldset>
                     </form>
                     <form action="../conexãoDB/pessoajuridica.php" method="POST" style="float: left;">
                         <fieldset>
-                            <legend><b>Fórmulário de Clientes Juridicos</b></legend>
+                            <legend><b>Fórmulário de juridico</b></legend>
                             <br>
                             <div class="inputBox">
                                 <input type="text" name="nomeJuridico" id="nome" class="inputUser" required>
-                                <label for="nome" class="labelInput">Nome completo</label>
+                                <label for="nome" class="labelInput">
+                                    Nome
+                                    completo
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="enderecoJuridico" id="endereco" class="inputUser" required>
-                                <label for="endereco" class="labelInput">Endereço</label>
+                                <label for="endereco" class="labelInput">
+                                    Endereço
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="tel" name="telefoneJuridico" id="telefone" class="inputUser" required>
-                                <label for="telefone" class="labelInput">Telefone</label>
+                                <label for="telefone" class="labelInput">
+                                    Telefone
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="situacaoJuridico" id="Situação" class="inputUser" required>
-                                <label for="Situação" class="labelInput">Situação</label>
+                                <label for="Situação" class="labelInput">
+                                    Situação
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="bairroJuridico" id="bairro" class="inputUser" required>
-                                <label for="bairro" class="labelInput">Bairro</label>
+                                <label for="bairro" class="labelInput">
+                                    Bairro
+                                </label>
                             </div>
                             <br>
                             <div class="inputBox">
                                 <input type="text" name="emailJuridico" id="email" class="inputUser" required>
-                                <label for="email" class="labelInput">Email</label>
+                                <label for="email" class="labelInput">
+                                    Email
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="cepJuridico" id="Cep" class="inputUser" required>
-                                <label for="Cep" class="labelInput">Cep</label>
+                                <label for="Cep" class="labelInput">
+                                    Cep
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="observacaoJuridico" id="Observacao" class="inputUser" required>
-                                <label for="Observacao" class="labelInput">Observação</label>
+                                <label for="Observacao" class="labelInput">
+                                    Observação
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="tipoJuridico" id="Tipo" class="inputUser" required>
-                                <label for="Tipo" class="labelInput">Tipo</label>
+                                <label for="Tipo" class="labelInput">
+                                    Tipo
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="razaoSocial" id="razaoSocial" class="inputUser" required>
-                                <label for="razaoSocial" class="labelInput">Razão social</label>
+                                <label for="razaoSocial" class="labelInput">
+                                    Razão
+                                    social
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="cnpj" id="cnpj" class="inputUser" required>
-                                <label for="cnpj" class="labelInput">cnpj</label>
+                                <label for="cnpj" class="labelInput">
+                                    cnpj
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="contato" id="contato" class="inputUser" required>
-                                <label for="contato" class="labelInput">Contato</label>
+                                <label for="contato" class="labelInput">
+                                    Contato
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
                             <div class="inputBox">
                                 <input type="text" name="inscrisaoEstadual" id="inscrisaoEstadual" class="inputUser"
                                     required>
-                                <label for="inscrisaoEstadual" class="labelInput">Incrisão estadual</label>
+                                <label for="inscrisaoEstadual" class="labelInput">
+                                    Incrisão
+                                    estadual
+                                </label>
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
 
                             <input type="submit" name="submit" id="submit">
                         </fieldset>

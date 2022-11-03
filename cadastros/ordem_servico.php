@@ -212,6 +212,7 @@
                     </thead>
                     <tbody>
                         <?php 
+                        $contagemTemp = 0;
                             while($user_data1 = mysqli_fetch_assoc($arrayOrdemServicos)){
                                 echo"<tr>";
                                 echo"<td>".$user_data1['id_ordemservico']."</td>";
@@ -228,7 +229,20 @@
                                 echo"<td>".$user_data1['dataentradaservico']."</td>";
                                 echo"<td>".$user_data1['horaentradaservico']."</td>";
                                 echo"</tr>";
+                                $contagemTemp++;
                             };
+                            echo"
+                            <table class=\"fl-table\">
+                                <thead>
+                                    <tr>
+                                        <th>Total:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td>".$contagemTemp."</td>
+                                <tbody>
+                            </table>
+                            "
                         ?>
                     <tbody>
                 </table>
@@ -236,7 +250,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr;">
                 <div class="table-wrapper">
                     <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Serviços</h1>
-                    <table class="fl-table ">
+                    <table class="fl-table">
                         <thead>
                             <tr>
                                 <th>ID serviços</th>

@@ -209,6 +209,7 @@
                     </thead>
                     <tbody>
                         <?php 
+                        $contagemTemp = 0;
                             while($user_data1 = mysqli_fetch_assoc($arrayProdutos)){
                                 echo"<tr>";
                                 echo"<td>".$user_data1['id_produto']."</td>";
@@ -224,7 +225,20 @@
                                 echo"<td>".$user_data1['Marca_estrangeiro']."</td>";
                                 echo"<td>".$user_data1['Grupo_estrangeiro']."</td>";
                                 echo"</tr>";
+                                $contagemTemp++;
                             };
+                            echo"
+                            <table class=\"fl-table\">
+                                <thead>
+                                    <tr>
+                                        <th>Total:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td>".$contagemTemp."</td>
+                                <tbody>
+                            </table>
+                            "
                         ?>
                     <tbody>
                 </table>
