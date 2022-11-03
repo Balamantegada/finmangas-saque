@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Nov-2022 às 16:36
+-- Tempo de geração: 03-Nov-2022 às 15:37
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -100,8 +100,16 @@ CREATE TABLE `contaspagar` (
   `desconto` int(11) NOT NULL,
   `juros` int(11) NOT NULL,
   `valorPago` int(11) NOT NULL,
-  `valorConta` int(11) NOT NULL
+  `valorConta` int(11) NOT NULL,
+  `id_da_conta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `contaspagar`
+--
+
+INSERT INTO `contaspagar` (`id_contas_pagar`, `quantidadeParcelas`, `dataVencimento`, `dataPagamento`, `numeroParcela`, `desconto`, `juros`, `valorPago`, `valorConta`, `id_da_conta`) VALUES
+(1, 1, '2005-02-05', '2005-02-05', 1, 15, 5, 500, 500, 0);
 
 -- --------------------------------------------------------
 
@@ -127,7 +135,8 @@ CREATE TABLE `contasreceber` (
 --
 
 INSERT INTO `contasreceber` (`id_contas_receber`, `quantidadeParecelas`, `dataVencimento`, `dataPagamento`, `numeroParcela`, `desconto`, `juros`, `valorPago`, `valorConta`, `id_da_conta`) VALUES
-(1, 12, '1222-12-12', '2222-02-12', 12, 50, 5, 500, 100000, 2);
+(1, 12, '1222-12-12', '2222-02-12', 12, 50, 5, 500, 100000, 2),
+(2, 1, '2222-12-01', '2222-12-12', 1, 111, 1, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -344,15 +353,18 @@ CREATE TABLE `planopagamento` (
   `id_plano_pagamento` int(11) NOT NULL,
   `descrisao` varchar(200) NOT NULL,
   `periodoEntreParecelas` int(11) NOT NULL,
-  `id_da_conta` int(11) NOT NULL
+  `id_da_conta` int(11) NOT NULL,
+  `compra_ou_pagamento` varchar(15) NOT NULL COMMENT 'aceita apenas "pagamento" ou "compra"'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `planopagamento`
 --
 
-INSERT INTO `planopagamento` (`id_plano_pagamento`, `descrisao`, `periodoEntreParecelas`, `id_da_conta`) VALUES
-(1, '15', 15, 2);
+INSERT INTO `planopagamento` (`id_plano_pagamento`, `descrisao`, `periodoEntreParecelas`, `id_da_conta`, `compra_ou_pagamento`) VALUES
+(1, '15', 15, 2, 'compra'),
+(2, '0', 0, 0, 'pagamento'),
+(3, '1', 1, 2, 'compra');
 
 -- --------------------------------------------------------
 
@@ -374,6 +386,13 @@ CREATE TABLE `produtosdb` (
   `Marca_estrangeiro` varchar(50) NOT NULL,
   `Grupo_estrangeiro` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `produtosdb`
+--
+
+INSERT INTO `produtosdb` (`id_produto`, `nome`, `codigobarra`, `referencia`, `descrisao`, `estoqueminimo`, `estoquemaximo`, `precocusto`, `precovenda`, `precovendaatacado`, `Marca_estrangeiro`, `Grupo_estrangeiro`) VALUES
+(1, 'manda', '123123', '123123312', '123', 123, 123, '12', '123', '50', 'DELL', 'Eletronicos');
 
 -- --------------------------------------------------------
 
@@ -547,13 +566,13 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de tabela `contaspagar`
 --
 ALTER TABLE `contaspagar`
-  MODIFY `id_contas_pagar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_contas_pagar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `contasreceber`
 --
 ALTER TABLE `contasreceber`
-  MODIFY `id_contas_receber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_contas_receber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `grupoprodutos`
@@ -601,13 +620,13 @@ ALTER TABLE `pessoasfisicas`
 -- AUTO_INCREMENT de tabela `planopagamento`
 --
 ALTER TABLE `planopagamento`
-  MODIFY `id_plano_pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_plano_pagamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `produtosdb`
 --
 ALTER TABLE `produtosdb`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `servico`
