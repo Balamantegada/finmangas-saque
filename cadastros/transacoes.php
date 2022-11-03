@@ -14,8 +14,12 @@
     $arrayListVendasItem = $conexao->query($sql2);
 
     // COMPRAS
+    include_once('../conexãoDB/config.php');
     $sql3 = "SELECT * FROM compra ORDER BY id_compra DESC";
     $arrayListCompras = $conexao->query($sql3);
+    include_once('../conexãoDB/config.php');
+    $sql5 = "SELECT * FROM itemcompra ORDER BY id_item_compra DESC";
+    $obtemValorArray = $conexao->query($sql5);
     include_once('../conexãoDB/config.php');
     $sql4 = "SELECT * FROM itemcompra ORDER BY id_item_compra DESC";
     $arrayListComprasItem = $conexao->query($sql4);
@@ -178,19 +182,20 @@
                 </div>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr;">
-                <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Vendas</h1>
-                    <table class="fl-table ">
-                        <thead>
-                            <tr>
-                                <th>ID_vendas</th>
-                                <th>Descrisão</th>
-                                <th>Data entrega</th>
-                                <th>Comprador</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
+                <div style="display: grid; grid-template-rows: 1fr 1fr;">
+                    <div class="table-wrapper">
+                        <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Vendas</h1>
+                        <table class="fl-table ">
+                            <thead>
+                                <tr>
+                                    <th>ID_vendas</th>
+                                    <th>Descrisão</th>
+                                    <th>Data entrega</th>
+                                    <th>Comprador</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
                             while($arrayListVendasData = mysqli_fetch_assoc($arrayListVendas)){
                                 echo"<tr>";
                                 echo"<td>".$arrayListVendasData['id_vendas']."</td>";
@@ -200,86 +205,99 @@
                                 echo"</tr>";
                             };
                         ?>
-                        <tbody>
-                    </table>
-                </div>
+                            <tbody>
+                        </table>
+                    </div>
 
-                <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Item venda</h1>
-                    <table class="fl-table ">
-                        <thead>
-                            <tr>
-                                <th>ID item venda </th>
-                                <th>Quantidade</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
+                    <div class="table-wrapper">
+                        <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Item venda</h1>
+                        <table class="fl-table ">
+                            <thead>
+                                <tr>
+                                    <th>ID item venda </th>
+                                    <th>Quantidade</th>
+                                    <th>Valor</th>
+                                    <th>Valor total (operação de valor vezes quantidade)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
                             while($arrayListVendasItemData = mysqli_fetch_assoc($arrayListVendasItem)){
                                 echo"<tr>";
                                 echo"<td>".$arrayListVendasItemData['id_item_venda']."</td>";
                                 echo"<td>".$arrayListVendasItemData['quantidade']."</td>";
                                 echo"<td>R$ ".$arrayListVendasItemData['valor']."</td>";
+                                $operation0 = $arrayListVendasItemData['valor'] * $arrayListVendasItemData['quantidade'];
+                                echo"<td>R$ ".$operation0."</td>";
                                 echo"</tr>";
                             };
                         ?>
-                        <tbody>
-                    </table>
+                            <tbody>
+                        </table>
+                    </div>
+
                 </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr;">
-                <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Compras</h1>
-                    <table class="fl-table ">
-                        <thead>
-                            <tr>
-                                <th>ID Compras</th>
-                                <th>Descrisão</th>
-                                <th>Data emissão</th>
-                                <th>Data entrega</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
+                <div style="display: grid; grid-template-rows: 1fr 1fr;">
+                    <div class="table-wrapper">
+                        <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Compras</h1>
+                        <table class="fl-table ">
+                            <thead>
+                                <tr>
+                                    <th>ID Compras</th>
+                                    <th>Descrisão</th>
+                                    <th>Data emissão</th>
+                                    <th>Data entrega</th>
+                                    <th>Valor da compra</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
                             while($arrayListComprasData = mysqli_fetch_assoc($arrayListCompras)){
                                 echo"<tr>";
                                 echo"<td>".$arrayListComprasData['id_compra']."</td>";
                                 echo"<td>".$arrayListComprasData['descrisao']."</td>";
                                 echo"<td>".$arrayListComprasData['dataEmissao']."</td>";
                                 echo"<td>".$arrayListComprasData['dataEntrega']."</td>";
-                                echo"</tr>";
+                                
                             };
+                            while($array = mysqli_fetch_assoc($obtemValorArray)) {
+                                $obtemValor = $array['valor'] * $array['quantidade'];
+                                echo"<td>R$ ".$obtemValor."</td>";
+                                echo"</tr>";
+                            }
                         ?>
-                        <tbody>
-                    </table>
-                </div>
+                            <tbody>
+                        </table>
+                    </div>
 
-                <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Item compra</h1>
-                    <table class="fl-table ">
-                        <thead>
-                            <tr>
-                                <th>ID item compra</th>
-                                <th>Quantidade</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
+                    <div class="table-wrapper">
+                        <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Item compra</h1>
+                        <table class="fl-table ">
+                            <thead>
+                                <tr>
+                                    <th>ID item compra</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor</th>
+                                    <th>Valor total (operação de valor vezes quantidade)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
                             while($arrayListCompraItemData = mysqli_fetch_assoc($arrayListComprasItem)){
                                 echo"<tr>";
                                 echo"<td>".$arrayListCompraItemData['id_item_compra']."</td>";
                                 echo"<td>".$arrayListCompraItemData['quantidade']."</td>";
                                 echo"<td>".$arrayListCompraItemData['valor']."</td>";
+                                $operation1 = $arrayListCompraItemData['valor'] * $arrayListCompraItemData['quantidade'];
+                                echo"<td>R$ ".$operation1."</td>";
                                 echo"</tr>";
                             };
                         ?>
-                        <tbody>
-                    </table>
+                            <tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
         </section>
     </main>
     <footer>

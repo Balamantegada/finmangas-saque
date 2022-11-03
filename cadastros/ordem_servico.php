@@ -241,7 +241,7 @@
                             <tr>
                                 <th>ID serviços</th>
                                 <th>Descrisão</th>
-                                <th>Valor/th>
+                                <th>Valor</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -267,6 +267,7 @@
                                 <th>Valor</th>
                                 <th>Atribute30</th>
                                 <th>Atribute34</th>
+                                <th>Valor total (operação de valor multiplicadosp elso atributos)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -277,6 +278,8 @@
                                 echo"<td>".$arrayListServicoItemData['valor']."</td>";
                                 echo"<td>".$arrayListServicoItemData['atribute30']."</td>";
                                 echo"<td>".$arrayListServicoItemData['atribute34']."</td>";
+                                $calcularValor = $arrayListServicoItemData['valor'] * $arrayListServicoItemData['atribute34'] * $arrayListServicoItemData['atribute30'];
+                                echo"<td>R$ ".$calcularValor."</td>";
                                 echo"</tr>";
                             };
                         ?>

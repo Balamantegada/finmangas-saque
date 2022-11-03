@@ -264,6 +264,7 @@
                             <th>Juros</th>
                             <th>Valor pago</th>
                             <th>Valor da conta</th>
+                            <th>Valor que falta</th>
                             <th>ID da conta</th>
                         </tr>
                     </thead>
@@ -280,8 +281,22 @@
                                 echo"<td>".$arrayTableContasReceberData['juros']."%</td>";
                                 echo"<td>R$ ".$arrayTableContasReceberData['valorPago']."</td>";
                                 echo"<td>R$ ".$arrayTableContasReceberData['valorConta']."</td>";
+
+
+                                $conta = $arrayTableContasReceberData['valorConta'];
+                                $pago = $arrayTableContasReceberData['valorPago'];
+                                $desconto = $arrayTableContasReceberData['desconto'];
+                                $juros = $arrayTableContasReceberData['juros'];
+                                $calcularValor = ($conta + ($conta*($juros*0.01)) - ($conta*($desconto*0.01))) - $pago;
+                                if ($calcularValor <= 0) {
+                                    $calcularValor = "Conta finalizada";
+                                    echo"<td> ".$calcularValor."</td>";
+                                } else {
+                                    echo"<td>R$ ".$calcularValor."</td>";
+                                }
+                                
                                 echo"<td>".$arrayTableContasReceberData['id_da_conta']."</td>";
-                                echo"</tr>";
+                                echo"</tr>";   
                             };
                         ?>
                     <tbody>
@@ -301,6 +316,7 @@
                             <th>Juros</th>
                             <th>Valor pago</th>
                             <th>Valor da conta</th>
+                            <th>Valor que falta</th>
                             <th>ID da conta</th>
                         </tr>
                     </thead>
@@ -317,6 +333,17 @@
                                 echo"<td>".$arrayTableContasPagarData['juros']."%</td>";
                                 echo"<td>R$ ".$arrayTableContasPagarData['valorPago']."</td>";
                                 echo"<td>R$ ".$arrayTableContasPagarData['valorConta']."</td>";
+                                $conta = $arrayTableContasPagarData['valorConta'];
+                                $pago = $arrayTableContasPagarData['valorPago'];
+                                $desconto = $arrayTableContasPagarData['desconto'];
+                                $juros = $arrayTableContasPagarData['juros'];
+                                $calcularValor = ($conta + ($conta*($juros*0.01)) - ($conta*($desconto*0.01))) - $pago;
+                                if ($calcularValor <= 0) {
+                                    $calcularValor = "Conta finalizada";
+                                    echo"<td> ".$calcularValor."</td>";
+                                } else {
+                                    echo"<td>R$ ".$calcularValor."</td>";
+                                }
                                 echo"<td>".$arrayTableContasPagarData['id_da_conta']."</td>";
                                 echo"</tr>";
                             };
