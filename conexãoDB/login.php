@@ -32,8 +32,9 @@
 		$conexao->close();
 		if ($res1->num_rows != 0) {
 			header('Location: ../home.php', true, 301);
+			$_SESSION['adm'] = $row[0];
 		} else {
-			header('Location: ../em andamento', true, 301);
+			header('Location: ../site_para_usuarios/home.php', true, 301);
 		}
 		
 		exit();

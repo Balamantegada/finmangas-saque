@@ -1,11 +1,5 @@
 <?php
-	//session_start inicia a sessão
-	session_start();
-
-	if (empty($_SESSION['usuario'])){
-		header('Location: ../index.php');
-		exit;
-	}
+    // Receber
     // Array para table
     include_once('../conexãoDB/config.php');
     $sql1 = "SELECT * FROM vendas ORDER BY id_vendas DESC";
@@ -16,6 +10,16 @@
     $sql2 = "SELECT * FROM contasreceber ORDER BY id_contas_receber  DESC";
     $arrayTableContasReceber = $conexao->query($sql2);
 
+    // Pagar
+    include_once('../conexãoDB/config.php');
+    $sql4 = "SELECT * FROM compra ORDER BY id_compra DESC";
+    $compraArrayForm = $conexao->query($sql4);
+
+    include_once('../conexãoDB/config.php');
+    $sql5 = "SELECT * FROM contaspagar ORDER BY id_contas_pagar  DESC";
+    $arrayTableContasPagar = $conexao->query($sql5);
+    
+    // Plano de pagamento
     include_once('../conexãoDB/config.php');
     $sql3 = "SELECT * FROM planopagamento ORDER BY id_plano_pagamento  DESC";
     $arrayTablePlanoDePagamentoReceber = $conexao->query($sql3);
@@ -35,6 +39,15 @@
 </head>
 
 <body>
+    <?php 
+    //session_start inicia a sessão
+	session_start();
+
+	if (empty($_SESSION['adm'])){
+		header('Location: ../index.php');
+		exit;
+	}
+    ?>
 
     <header>
         <nav>
@@ -54,7 +67,7 @@
                 <li><a href="/perfil.php">Perfil</a></li>
                 <?php
                     if(empty($_session['usuario'])){
-                        echo'<li><a href="/sair.php" class="login">Sair</a></li>';
+                        echo'<li><a href="../conexãoDB/sair.php" class="login">Sair</a></li>';
                     } else{
                         echo'<li><a href="/index.php" class="login">Login</a></li>';
                     }
@@ -69,7 +82,7 @@
         <section>
             <h1>Contas</h1>
             <img src="/imgs/icons/contas_icon.png">
-            <div class="container">
+            <div class="container" style="display: grid;  grid-template-columns: 1fr 1fr;">
                 <div class="formularioBody">
                     <form action="../conexãoDB/DTOCONTAS/contasreceberDTO.php" method="POST" style="float: left;">
                         <fieldset>
@@ -79,7 +92,7 @@
                             <?php 
                                     while($dataVenda = mysqli_fetch_assoc($vendaArrayForm)){
                                         echo"<input type=\"radio\" id=".$dataVenda['id_vendas']." name=\"idDaVenda\" value=".$dataVenda['id_vendas']." required>";
-                                        echo"<label for=".$dataVenda['id_vendas'].">".$dataVenda['id_vendas']."</label>";
+                                        echo"<label for=".$dataVenda['id_vendas'].">".$dataVenda['id_vendas']."º ".$dataVenda['descriscao']."</label>";
                                         echo"<br>";
                                     };
                                     ?>
@@ -153,82 +166,109 @@
                             <input type="submit" name="submit" id="submit">
                         </fieldset>
                     </form>
-                    <form action="../conexãoDB/pessoajuridica.php" method="POST" style="float: left;">
+
+                </div>
+                <div class="formularioBody">
+                    <form action="../conexãoDB/DTOCONTAS/contaspagarDTO.php" method="POST" style="float: left;">
                         <fieldset>
-                            <legend><b>Fórmulário de Clientes fisicos</b></legend>
+                            <legend><b>Fórmulário de contas a pagar:</b></legend>
+                            <br>
+                            <p>Compras: (olhar tabelas nas transações)</p>
+                            <?php 
+                                    while($dataCompra = mysqli_fetch_assoc($compraArrayForm)){
+                                        echo"<input type=\"radio\" id=".$dataCompra['id_compra']." name=\"idDaCompra\" value=".$dataCompra['id_compra']." required>";
+                                        echo"<label for=".$dataCompra['id_compra'].">".$dataCompra['id_compra']."º ".$dataCompra['descrisao']."</label>";
+                                        echo"<br>";
+                                    };
+                                    ?>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="number" name="quantidadeDeParcelas" id="quantidadeDeParcelas"
+                                    class="inputUser" required>
+                                <label for="quantidadeDeParcelas" class="labelInput">Quantidade de
+                                    parcelas</label>
+                            </div>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="date" name="dataDeVencimento" id="dataDeVencimento" class="inputUser"
+                                    required>
+                                <label for="dataDeVencimento" class="labelInput">Data de vencimento</label>
+                            </div>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="date" name="dataDePagamento" id="dataDePagamento" class="inputUser"
+                                    required>
+                                <label for="dataDePagamento" class="labelInput">Data de pagamento</label>
+                            </div>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="number" name="numeroParcela" id="numeroParcela" class="inputUser" required>
+                                <label for="numeroParcela" class="labelInput">Numero parcela</label>
+                            </div>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="number" name="desconto" id="desconto" class="inputUser" required>
+                                <label for="desconto" class="labelInput">Desconto</label>
+                            </div>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="number" name="juros" id="juros" class="inputUser" required>
+                                <label for="juros" class="labelInput">Juros</label>
+                            </div>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="number" name="valorPago" id="valorPago" class="inputUser" required>
+                                <label for="valorPago" class="labelInput">Valor pago</label>
+                            </div>
+                            <br><br>
+                            <div class="inputBox">
+                                <input type="number" name="valorConta" id="valorConta" class="inputUser" required>
+                                <label for="valorConta" class="labelInput">Valor Conta</label>
+                            </div>
+                            <br><br>
+
+                        </fieldset>
+                        <fieldset>
+                            <legend><b>Formulário pagamento</b></legend>
                             <br>
                             <div class="inputBox">
-                                <input type="text" name="nomeJuridico" id="nome" class="inputUser" required>
-                                <label for="nome" class="labelInput">Nome completo</label>
+                                <input type="text" name="descrisao" id="descrisao" class="inputUser" required>
+                                <label for="descrisao" class="labelInput">Descrisão</label>
                             </div>
                             <br><br>
                             <div class="inputBox">
-                                <input type="text" name="enderecoJuridico" id="endereco" class="inputUser" required>
-                                <label for="endereco" class="labelInput">Endereço</label>
-                            </div>
-                            <br><br>
-                            <div class="inputBox">
-                                <input type="tel" name="telefoneJuridico" id="telefone" class="inputUser" required>
-                                <label for="telefone" class="labelInput">Telefone</label>
+                                <input type="number" name="periodoEntreAsParcelas" id="periodoEntreAsParcelas"
+                                    class="inputUser" required>
+                                <label for="periodoEntreAsParcelas" class="labelInput">Periodo entre as
+                                    parcelas</label>
                             </div>
                             <br><br>
                             <input type="submit" name="submit" id="submit">
                         </fieldset>
                     </form>
-                    <div style="display: grid; grid-template-rows: 20vh;">
-                        <form action="../conexãoDB/DTOPESSOAS/cidadeDTO.php" method="POST" style="float: right;">
-                            <fieldset>
-                                <legend><b>Fórmulário de cidades</b></legend>
-                                <br>
-                                <div class="inputBox">
-                                    <input type="text" name="cidadeCadas" id="cidadeCadas" class="inputUser" required>
-                                    <label for="cidadeCadas" class="labelInput">Cidade</label>
-                                </div>
-                                <br><br>
-                                <input type="submit" name="submit" id="submit">
-                            </fieldset>
-                        </form>
-                        <form action="../conexãoDB/DTOPESSOAS/estadoDTO.php" method="POST" style="float: right;">
-                            <fieldset>
-                                <legend><b>Fórmulário de Estados</b></legend>
-                                <br>
-                                <div class="inputBox">
-                                    <input type="text" name="nomeEstado" id="nomeEstado" class="inputUser" required>
-                                    <label for="nomeEstado" class="labelInput">Estado</label>
-                                </div>
-                                <br><br>
-                                <div class="inputBox">
-                                    <input type="text" name="siglaEstado" id="siglaEstado" class="inputUser" required>
-                                    <label for="siglaEstado" class="labelInput">Sigla estado</label>
-                                </div>
-                                <br><br>
-                                <input type="submit" name="submit" id="submit">
-                            </fieldset>
-                        </form>
-                    </div>
 
                 </div>
+
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr;">
-                <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Contas receber</h1>
-                    <table class="fl-table ">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Quantidade de parcelas</th>
-                                <th>Data de vencimento</th>
-                                <th>Data de pagamento</th>
-                                <th>Numero de parcelas</th>
-                                <th>Desconto</th>
-                                <th>Juros</th>
-                                <th>Valor pago</th>
-                                <th>Valor da conta</th>
-                                <th>ID da conta</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
+            <div class="table-wrapper">
+                <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Contas à receber</h1>
+                <table class="fl-table ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Quantidade de parcelas</th>
+                            <th>Data de vencimento</th>
+                            <th>Data de pagamento</th>
+                            <th>Numero de parcelas</th>
+                            <th>Desconto</th>
+                            <th>Juros</th>
+                            <th>Valor pago</th>
+                            <th>Valor da conta</th>
+                            <th>ID da conta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
                             while($arrayTableContasReceberData = mysqli_fetch_assoc($arrayTableContasReceber)){
                                 echo"<tr>";
                                 echo"<td>".$arrayTableContasReceberData['id_contas_receber']."</td>";
@@ -244,35 +284,73 @@
                                 echo"</tr>";
                             };
                         ?>
-                        <tbody>
-                    </table>
-                </div>
-
-                <div class="table-wrapper">
-                    <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Plano de pagamento</h1>
-                    <table class="fl-table ">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Descrisão</th>
-                                <th>Periodo entre parcelas</th>
-                                <th>Id da conta</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                            while($arrayTablePlanoDePagamentoReceberData = mysqli_fetch_assoc($arrayTablePlanoDePagamentoReceber)){
+                    <tbody>
+                </table>
+            </div>
+            <div class="table-wrapper">
+                <h1 style="font-size: 40px; text-align: center; color: aliceblue;">Contas à pagar</h1>
+                <table class="fl-table ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Quantidade de parcelas</th>
+                            <th>Data de vencimento</th>
+                            <th>Data de pagamento</th>
+                            <th>Numero de parcelas</th>
+                            <th>Desconto</th>
+                            <th>Juros</th>
+                            <th>Valor pago</th>
+                            <th>Valor da conta</th>
+                            <th>ID da conta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            while($arrayTableContasPagarData = mysqli_fetch_assoc($arrayTableContasPagar)){
                                 echo"<tr>";
-                                echo"<td>".$arrayTablePlanoDePagamentoReceberData['id_plano_pagamento']."</td>";
-                                echo"<td>".$arrayTablePlanoDePagamentoReceberData['descrisao']."</td>";
-                                echo"<td>".$arrayTablePlanoDePagamentoReceberData['periodoEntreParecelas']." dias</td>";
-                                echo"<td>".$arrayTablePlanoDePagamentoReceberData['id_da_conta']."</td>";
+                                echo"<td>".$arrayTableContasPagarData['id_contas_pagar']."</td>";
+                                echo"<td>".$arrayTableContasPagarData['quantidadeParcelas']."</td>";
+                                echo"<td>".$arrayTableContasPagarData['dataVencimento']."</td>";
+                                echo"<td>".$arrayTableContasPagarData['dataPagamento']."</td>";
+                                echo"<td>".$arrayTableContasPagarData['numeroParcela']."</td>";
+                                echo"<td>".$arrayTableContasPagarData['desconto']."%</td>";
+                                echo"<td>".$arrayTableContasPagarData['juros']."%</td>";
+                                echo"<td>R$ ".$arrayTableContasPagarData['valorPago']."</td>";
+                                echo"<td>R$ ".$arrayTableContasPagarData['valorConta']."</td>";
+                                echo"<td>".$arrayTableContasPagarData['id_da_conta']."</td>";
                                 echo"</tr>";
                             };
                         ?>
-                        <tbody>
-                    </table>
-                </div>
+                    <tbody>
+                </table>
+
+            </div>
+            <div class="table-wrapper">
+                <h1 style="font-size: 40px; text-align: center; color:aliceblue;">Plano de pagamento</h1>
+                <table class="fl-table ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descrisão</th>
+                            <th>Periodo entre parcelas</th>
+                            <th>Id da conta</th>
+                            <th>Pagamento ou compra?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            while($arrayTablePlanoDePagamentoData = mysqli_fetch_assoc($arrayTablePlanoDePagamentoReceber)){
+                                echo"<tr>";
+                                echo"<td>".$arrayTablePlanoDePagamentoData['id_plano_pagamento']."</td>";
+                                echo"<td>".$arrayTablePlanoDePagamentoData['descrisao']."</td>";
+                                echo"<td>".$arrayTablePlanoDePagamentoData['periodoEntreParecelas']." dias</td>";
+                                echo"<td>".$arrayTablePlanoDePagamentoData['id_da_conta']."</td>";
+                                echo"<td>".$arrayTablePlanoDePagamentoData['compra_ou_pagamento']."</td>";
+                                echo"</tr>";
+                            };
+                        ?>
+                    <tbody>
+                </table>
             </div>
 
         </section>

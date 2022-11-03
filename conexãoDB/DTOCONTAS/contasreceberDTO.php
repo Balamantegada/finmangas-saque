@@ -18,6 +18,6 @@
     include_once('../config.php');
     $result1 = mysqli_query($conexao, "INSERT INTO contasreceber(quantidadeParecelas, dataVencimento, dataPagamento, numeroParcela, desconto, juros, valorPago, valorConta, id_da_conta) VALUES('$quantidadeDeParcelasReceber', '$dataDeVencimentoReceber', '$dataDePagamentoReceber', '$numeroParcelaReceber', '$descontoReceber', '$jurosReceber', '$valorPagoReceber', '$valorContaReceber', '$idDaVenda')");
     include_once('../config.php');
-    $result2 = mysqli_query($conexao, "INSERT INTO planopagamento(descrisao, periodoEntreParecelas, id_da_conta) VALUES('$descrisaoReceber', '$periodoEntreAsParcelasReceber', '$idDaVenda')");
+    $result2 = mysqli_query($conexao, "INSERT INTO planopagamento(descrisao, periodoEntreParecelas, id_da_conta, compra_ou_pagamento) VALUES('$descrisaoReceber', '$periodoEntreAsParcelasReceber', '$idDaVenda', 'compra')");
     header('Location: ../../cadastros/contas.php', true, 301);
 ?>

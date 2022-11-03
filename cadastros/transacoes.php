@@ -1,11 +1,4 @@
 <?php
-	//session_start inicia a sessão
-	session_start();
-
-	if (empty($_SESSION['usuario'])){
-		header('Location: ../index.php');
-		exit;
-	}
     // VENDAS
     include_once('../conexãoDB/config.php');
     $formVendaCMDfisica = "SELECT * FROM pessoasfisicas ORDER BY id_pessoa DESC";
@@ -42,7 +35,15 @@
 </head>
 
 <body>
+    <?php 
+    //session_start inicia a sessão
+	session_start();
 
+	if (empty($_SESSION['adm'])){
+		header('Location: ../index.php');
+		exit;
+	}
+    ?>
     <header>
         <nav>
             <a href="/home.php">
@@ -61,7 +62,7 @@
                 <li><a href="/perfil.php">Perfil</a></li>
                 <?php
                     if(empty($_session['usuario'])){
-                        echo'<li><a href="/sair.php" class="login">Sair</a></li>';
+                        echo'<li><a href="../conexãoDB/sair.php" class="login">Sair</a></li>';
                     } else{
                         echo'<li><a href="/index.php" class="login">Login</a></li>';
                     }
