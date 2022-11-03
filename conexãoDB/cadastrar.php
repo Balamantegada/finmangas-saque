@@ -15,7 +15,7 @@
 		$email = $conexao -> real_escape_string($_POST['email']);		
         //insere os dados no banco de dados.
         $sql="INSERT INTO `cadastros1`
-			(`usuario`, `senha`, `email`, `ativo`)
+			(`usuario`, `senha`, `email`, `ativo`, `nivelacesso`)
 			VALUES
 			('".$usuario."', '".$senha."', '".$email."', '1', 'user');";
 
