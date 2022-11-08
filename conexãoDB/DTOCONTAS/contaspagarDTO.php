@@ -1,6 +1,6 @@
 <?php
     // Formulario de receber
-    $idDaVenda = $_POST['idDaCompra'];
+    $idDaCompra = $_POST['idDaCompra'];
     $quantidadeDeParcelas = $_POST['quantidadeDeParcelas'];
     $dataDeVencimento = date('Y-m-d', strtotime($_POST['dataDeVencimento']));
     $dataDePagamento = date('Y-m-d', strtotime($_POST['dataDePagamento']));
@@ -11,7 +11,7 @@
     $valorConta = $_POST['valorConta'];
 
     // Formulario pagar (planejamento de contas)
-    $descrisao = $_POST['periodoEntreAsParcelas'];
+    $descrisao = $_POST['descrisao'];
     $periodoEntreAsParcelas = $_POST['periodoEntreAsParcelas'];
 
     // cadastro no banco

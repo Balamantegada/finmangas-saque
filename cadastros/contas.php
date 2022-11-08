@@ -151,9 +151,8 @@
                             <legend><b>Formulário pagamento</b></legend>
                             <br>
                             <div class="inputBox">
-                                <input type="text" name="descrisaoReceber" id="descrisaoReceber" class="inputUser"
-                                    required>
-                                <label for="descrisaoReceber" class="labelInput">Descrisão</label>
+                                <input type="text" name="descrisao" id="descrisao" class="inputUser" required>
+                                <label for="descrisao" class="labelInput">Descrisão</label>
                             </div>
                             <br><br>
                             <div class="inputBox">

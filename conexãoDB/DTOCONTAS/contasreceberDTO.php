@@ -11,7 +11,7 @@
     $valorContaReceber = $_POST['valorContaReceber'];
 
     // Formulario receber (planejamento de contas)
-    $descrisaoReceber = $_POST['periodoEntreAsParcelasReceber'];
+    $descrisaoReceber = $_POST['descrisao'];
     $periodoEntreAsParcelasReceber = $_POST['periodoEntreAsParcelasReceber'];
 
     // cadastro no banco
